@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!--Constants -->
+	<constant name="struts.locale" value="zh_CN" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<include file="struts-sys.xml" />
+	<!--<include file="centerRegister.xml" /> 
+	<include file="centerInfoManage.xml" />
+	-->
+	<package name="default" namespace="/" extends="struts-default">
+	   <action name="loginAction" class="LoginAction">
+	      <result name="success" type="redirect" >/default.jsp</result>
+	      <result name="login">/login.jsp</result>
+	   </action>
+	   
+	   <action name="userAction" class="UserAction" />
+	   <action name="pwdAction" class="PwdAction" />
+	   
+	   <action name="logoutAction" class="org.spes.action.login.LogoutAction">
+	      <result name="success">/login.jsp</result>
+	   </action>
+	   <action name="staffAction" class="StaffAction" />
+	   <action name="roleAction" class="RoleAction" />
+	</package>
+	
+	<package name="gyx" namespace="/gyx/centerResult" extends="struts-default">
+		<!--
+		<interceptors>
+			<interceptor name="authCenterFilter" class="org.spes.action.interceptor.result.CenterAuthFilter">
+			</interceptor>
+			<interceptor-stack name="authCenterStack">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="authCenterFilter"/>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authCenterStack"></default-interceptor-ref>
+		-->
+		<action name="centerResultAction" class="CenterResultAction" method="GetCenterResult"></action>
+		<action name="download" class="a.b.c.DownloadAction" >
+    		<param name="directory">ResultDetail</param>
+    		<result name="success" type="stream">
+        		<param name="contentType">text/plain</param>
+       			<param name="inputName">inputStream</param>
+       			<!--动态获取文件名，从Action中的取得filename-->
+        		<param name="contentDisposition">
+            		attachment;filename="${filename}"
+        		</param>
+        		<param name="bufferSize">2048</param>
+    		</result>
+		</action>
+	</package>
+	
+	<package name="gyxWindow" namespace="/gyx/windowResult" extends="struts-default">
+		<!--
+		<interceptors>
+			<interceptor name="authWindowFilter" class="org.spes.action.interceptor.result.WindowAuthFilter">
+			</interceptor>
+			<interceptor-stack name="authWindowStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authWindowFilter" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authWindowStack"></default-interceptor-ref>
+		-->
+		<action name="availbleWindowAction" class="AvailbleWindowAction" method="GetAllAvailableWindow">
+		</action>
+		<action name="getWindowResult" class="AvailbleWindowAction" method="GetWindowResult"></action>
+	</package>
+	<package name="gyxStaff" namespace="/gyx/staffResult" extends="struts-default">
+		<!--
+		<interceptors>
+			<interceptor name="authStaffFilter" class="org.spes.action.interceptor.result.StaffAuthFilter">
+			</interceptor>
+			<interceptor-stack name="authStaffStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authStaffFilter" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authStaffStack"></default-interceptor-ref>
+		-->
+		<action name="getStaffAndScore" class="GetStaffAndScore" method="GetStaffAndScore"></action>
+	</package>
+	
+	<package name="gyxUser" namespace="/gyx/userModify" extends="struts-default">
+		<action name="loadUser" class="UserAction" method="LoadUserInfo"></action>
+		<action name="modifyUser" class="UserAction" method="MofigyUserInfo"></action>
+	</package>
+	
+	
+	<package name="dj" namespace="/centermg" extends = "struts-default">
+		<action name="centerRegisterAction" class="CenterRegisterAction" >
+			<result name="listRegister">/centerManage/serviceAudit.jsp</result>
+		</action>
+		<action name="centerManageAction" class="CenterManageAction" >
+			<result name="serviceInfo">/centerManage/listCenterInfo.jsp</result>
+		</action>
+	</package>
+	
+	<package name="zsj" namespace="/zjson" extends="json-default">
+			<action name="centerAllPara" class="CenterAllPara"></action>
+			<action name="centerParamsRows" class="CenterParamsRows"></action>
+			<action name="centerSenThirdItems" class="CenterSenThirdItems"></action>
+			<action name="centerItemEditor" class="CenterItemEditor"></action>
+			<action name="centerFormulas" class="CenterFormulas"></action>
+	</package>
+	
+	<package name="zsjwindow" namespace="/winjson" extends="json-default">
+			<action name="centerAllPara" class="WindowAllPara"></action>
+			<action name="centerParamsRows" class="WindowParamsRows"></action>
+			<action name="centerSenThirdItems" class="WindowSenThirdItems"></action>
+			<action name="centerItemEditor" class="WindowItemEditor"></action>
+			<action name="centerFormulas" class="WindowFormulas"></action>
+	</package>
+	<package name="zsjstaff" namespace="/staffjson" extends="json-default">
+			<action name="centerAllPara" class="StaffAllPara"></action>
+			<action name="centerParamsRows" class="StaffParamsRows"></action>
+			<action name="centerSenThirdItems" class="StaffSenThirdItems"></action>
+			<action name="centerItemEditor" class="StaffItemEditor"></action>
+			<action name="centerFormulas" class="StaffFormulas"></action>
+	</package>
+</struts>    

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="hg" namespace="/sys" extends = "struts-default">
+		<action name="noticeAction" class="NoticeAction" />
+		<action name="consultAction" class="ConsultAction"/>
+		<action name="replyAction" class="ReplyAction"/>
+		<action name="windowAction" class="WindowAction" />
+		<action name="centerAction" class="CenterAction" />
+		<action name="postAction" class="PostAction" />
+		<action name="centerItemAction" class="CenterItemAction" />
+	</package>
+	
+	<package name="hgcenter" namespace="/center" extends="struts-default">
+	   <action name="centerFormulaAction" class="CenterFormulaAction" />
+	   <action name="centerScoreAction" class="CenterScoreAction" />
+	   <action name="centerParamAction" class="CenterParamAction" />
+	   <action name="evaluateCSheetAction" class="SheetOperatorAction"/>
+	   <action name="exportParameterAction" class="ExportParameterAction" />
+	</package>
+	
+	<package name="hewin" namespace="/win" extends = "struts-default">
+	   <action name="windowItemAction" class="WindowItemAction" />
+	   <action name="windowScoreAction" class="WindowScoreAction" /> 
+	   <!-- 
+	   <action name="windowFormulaAction" class="WindowFormulaAction" />
+	    -->
+	</package>
+	
+	<package name="hgstaff" namespace="/staff" extends="struts-default">
+	   <action name="staffItemAction" class="StaffItemAction" />
+	   <action name="staffScoreAction" class="StaffScoreAction" />
+	   <action name="staffParamAction" class="StaffParamAction" />
+	   <action name="staffFormulaAction" class="StaffFormulaAction"/>
+	</package>
+	
+</struts>

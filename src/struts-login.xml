@@ -1,0 +1,6 @@
+<package  name="default"  namespace="/user" extends="struts-default">
+	   <action name="loginAction" class="LoginAction">
+	      <result name="success">/frame.jsp</result>
+	      <result name="login">/login.jsp</result>
+	   </action>
+</package>
