@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!-- 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/gps"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+-->
+	 
+	<!-- 使用C3P0数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+	   <property name="driverClass" value="com.mysql.jdbc.Driver" />
+	   <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/gps?characterEncoding=gbk" />
+	   <property name="user" value="root" />
+	   <property name="password" value="root" />
+	   <property name="maxPoolSize" value="100" />
+	   <property name="minPoolSize" value="1" />
+	   <property name="initialPoolSize" value="1" />
+	   <property name="maxIdleTime" value="20" />
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">
+				  false
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>org/spes/bean/Post.hbm.xml</value>
+				<value>org/spes/bean/Role.hbm.xml</value>
+				<value>org/spes/bean/Notice.hbm.xml</value>
+				<value>org/spes/bean/Consult.hbm.xml</value>
+				<value>org/spes/bean/Reply.hbm.xml</value>
+				<value>org/spes/bean/BdCity.hbm.xml</value>
+				<value>org/spes/bean/BdCounty.hbm.xml</value>
+				<value>org/spes/bean/BdProvince.hbm.xml</value>
+				<value>org/spes/bean/Action.hbm.xml</value>
+				<value>org/spes/bean/ActionRole.hbm.xml</value>
+				<value>org/spes/bean/UserAudit.hbm.xml</value>
+				<value>org/spes/bean/ServiceCenterAudit.hbm.xml</value>
+				<value>org/spes/bean/ServiceCenter.hbm.xml</value>
+				<value>org/spes/bean/User.hbm.xml</value>
+				<value>org/spes/bean/Window.hbm.xml</value>
+				<value>org/spes/bean/CenterFormula.hbm.xml</value>
+				<value>org/spes/bean/CenterItem.hbm.xml</value>
+				<value>org/spes/bean/CenterParam.hbm.xml</value>
+				<value>org/spes/bean/CenterScore.hbm.xml</value>
+				<value>org/spes/bean/WindowFormula.hbm.xml</value>
+				<value>org/spes/bean/WindowItem.hbm.xml</value>
+				<value>org/spes/bean/WindowParam.hbm.xml</value>
+				<value>org/spes/bean/WindowScore.hbm.xml</value>
+				<value>org/spes/bean/StaffFormula.hbm.xml</value>
+				<value>org/spes/bean/StaffItem.hbm.xml</value>
+				<value>org/spes/bean/StaffParam.hbm.xml</value>
+				<value>org/spes/bean/StaffScore.hbm.xml</value>
+				<value>org/spes/bean/Evaluatesheet.hbm.xml</value></list>
+		</property>
+	</bean>
+		
+	<!-- 事务处理 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager" >
+	  <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 邮件服务 -->
+	<bean id="javaMilSenderService" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	   <property name="host" value="smtp.126.com"/>
+	   <property name="port" value="25"/>
+	   <property name="username" value="hegang_126@126.com"/>
+	   <property name="password" value="HEGANG_126126"/>
+	   <property name="defaultEncoding" value="UTF-8"></property>  
+	   <property name="javaMailProperties">      
+        <props>   
+            <prop key="mail.smtp.auth">true</prop>      
+        </props>      
+    </property> 
+	</bean>
+	<!-- 邮件模板引擎 -->
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+	  <property name="velocityProperties">
+	    <props>
+	       <prop key="resource.loader">class</prop>
+	       <prop key="class.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+	    </props>
+	  </property>
+	</bean>
+		
+	<!-- DAO -->
+	<bean id="PostDAO" class="org.spes.dao.common.impl.PostDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RoleDAO" class="org.spes.dao.common.impl.RoleDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NoticeDAO" class="org.spes.dao.sys.impl.NoticeDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ConsultDAO" class="org.spes.dao.sys.impl.ConsultDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ReplyDAO" class="org.spes.dao.sys.impl.ReplyDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdCityDAO" class="org.spes.dao.common.impl.BdCityDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdCountyDAO" class="org.spes.dao.common.impl.BdCountyDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BdProvinceDAO" class="org.spes.dao.common.impl.BdProvinceDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ActionDAO" class="org.spes.role.dao.impl.ActionDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ActionRoleDAO" class="org.spes.role.dao.impl.ActionRoleDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserAuditDAO" class="org.spes.dao.user.impl.UserAuditDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceCenterAuditDAO"
+		class="org.spes.dao.common.impl.ServiceCenterAuditDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ServiceCenterDAO"
+		class="org.spes.dao.common.impl.ServiceCenterDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO" class="org.spes.dao.user.impl.UserDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WindowDAO" class="org.spes.dao.common.impl.WindowDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CenterFormulaDAO"
+		class="org.spes.dao.item.impl.CenterFormulaDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CenterItemDAO" class="org.spes.dao.item.impl.CenterItemDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CenterParamDAO" class="org.spes.dao.item.impl.CenterParamDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CenterScoreDAO" class="org.spes.dao.item.impl.CenterScoreDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WindowFormulaDAO"
+		class="org.spes.dao.item.impl.WindowFormulaDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WindowItemDAO" class="org.spes.dao.item.impl.WindowItemDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WindowParamDAO" class="org.spes.dao.item.impl.WindowParamDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="WindowScoreDAO" class="org.spes.dao.item.impl.WindowScoreDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StaffFormulaDAO" class="org.spes.dao.item.impl.StaffFormulaDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StaffItemDAO" class="org.spes.dao.item.impl.StaffItemDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StaffParamDAO" class="org.spes.dao.item.impl.StaffParamDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StaffScoreDAO" class="org.spes.dao.item.impl.StaffScoreDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="EvaluatesheetDAO"	class="org.spes.dao.common.impl.EvaluatesheetDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<!-- Service -->
+	
+	<bean id="EvaluatesheetService" class="org.spes.service.common.impl.EvaluateSheetServiceImpl">
+	   <property name="evaluateSheetDao" ref="EvaluatesheetDAO"></property>
+	   <property name="centerScoreDao" ref="CenterScoreDAO" />
+	   <property name="staffScoreDao" ref="StaffScoreDAO" />
+	   <property name="windowScoreDao" ref="WindowScoreDAO" />
+	</bean>
+	
+	<bean id="ResultService" class="org.spes.service.result.impl.ResultServiceImpl">
+		<property name="centerDao" ref="CenterScoreDAO"></property>
+		<property name="windowDao" ref="WindowScoreDAO"></property>
+		<property name="staffDao" ref="StaffScoreDAO"></property>
+		<property name="userDao" ref="UserDAO"></property>
+	</bean>
+	
+	<bean id="ActionService" class="org.spes.service.auth.impl.ActionServiceImpl">
+		<property name="actionDAO" ref="ActionDAO"></property>
+	</bean>
+
+	<bean id="ActionRoleService" class="org.spes.service.auth.impl.ActionRoleServiceImpl">
+		<property name="actionRoleDAO" ref="ActionRoleDAO"></property>
+	</bean>
+
+	<bean id="NoticeService" class="org.spes.service.sys.impl.NoticeServiceImpl">
+		<property name="noticeDao" ref="NoticeDAO"></property>
+		<property name="serviceCenterDao" ref="ServiceCenterDAO" />
+		<property name="userDao" ref="UserDAO" />
+	</bean>
+
+ 	<bean id="ConsultService" class="org.spes.service.sys.impl.ConsultServiceImpl"> 
+		<property name="consultDao" ref="ConsultDAO"></property>
+		<property name="userDao" ref="UserDAO" />
+	</bean>
+	
+    <bean id="ReplyService" class="org.spes.service.sys.impl.ReplyServiceImpl">
+		<property name="replyDao" ref="ReplyDAO" />
+		<property name="consultDao" ref="ConsultDAO"/>
+		<property name="userDao" ref="UserDAO" />
+	</bean>
+
+	<bean id="WindowService" class="org.spes.service.result.impl.WindowServiceImpl">
+		<property name="windowDao" ref="WindowDAO"></property>
+		<property name="centerDao" ref="ServiceCenterDAO" />
+	</bean>
+	<!-- service by zsj start -->
+	<bean id="CenterItemSerive" class="org.spes.service.center.impl.CenterItemServiceImpl">
+	       <property name="centerItemDao" ref="CenterItemDAO"></property>
+	       <property name="centerFormulaDao" ref="CenterFormulaDAO" />
+	</bean>
+	<bean id="CenterService" class="org.spes.service.center.impl.CenterServiceImpl">
+	      <property name="centerServiceDAO" ref="ServiceCenterDAO"></property>
+	</bean>
+	<bean id="CenterFormulaService" class="org.spes.service.center.impl.CenterItemFormulaServiceImpl">
+	      <property name="centerFormulaDao" ref="CenterFormulaDAO"></property>
+	</bean>
+	
+	<bean id="WindowItemService" class="org.spes.service.window.impl.WindowItemServiceImpl">
+	    <property name="windowItemDao" ref="WindowItemDAO" />
+	    <property name="windowFormulaDao" ref="WindowFormulaDAO" />
+	</bean>
+	
+	<bean id="WindowFormulaService" class="org.spes.service.window.impl.WindowFormulaServiceImpl">
+	    <property name="windowFormulaDao" ref="WindowFormulaDAO" />
+	</bean>
+	<!-- service  by zsj end -->
+	
+	<!-- by hegang -->
+	<bean id="RoleService" class="org.spes.service.auth.impl.RoleServiceImpl">
+	    <property name="roleDAO" ref="RoleDAO"></property>
+	</bean>
+	
+	<bean id="CenterParamService" class="org.spes.service.center.impl.CenterParamServiceImpl">
+	    <property name="centerParamDao" ref="CenterParamDAO"></property>
+	</bean>
+	
+	<bean id="UserService" class="org.spes.service.user.impl.UserServiceImpl">
+	    <property name="userDao" ref="UserDAO" />
+	    <property name="roleDao" ref="RoleDAO" />
+	    <property name="centerDao" ref="ServiceCenterDAO" />
+	</bean>
+	
+	<bean id="CenterScoreService" class="org.spes.service.center.impl.CenterScoreServiceImpl">
+	    <property name="centerScoreDao" ref="CenterScoreDAO" />
+	    <property name="centerFormulaDao" ref="CenterFormulaDAO" />
+	    <property name="centerParamDao" ref="CenterParamDAO" />
+	    <property name="centerItemDao" ref="CenterItemDAO" />
+	    <property name="centerParamService" ref="CenterParamService" />
+	</bean>
+	
+	
+	<bean id="WindowScoreService" class="org.spes.service.window.impl.WindowScoreServiceImpl">
+	    <property name="windowScoreDao" ref="WindowScoreDAO" />
+	    <property name="windowParamDao" ref="WindowParamDAO" />
+	    <property name="windowFormulaDao" ref="WindowFormulaDAO" />
+	    <property name="windowItemDao" ref="WindowItemDAO" />
+	</bean>
+	
+	<bean id="StaffItemService" class="org.spes.service.staff.impl.StaffItemServiceImpl">
+	   <property name="staffItemDao" ref="StaffItemDAO" />
+	   <property name="staffFormulaDao" ref="StaffFormulaDAO" />
+	</bean>
+	
+	<bean id="StaffFormulaService" class="org.spes.service.staff.impl.StaffFormulaServiceImpl">
+	   <property name="staffFormulaDao" ref="StaffFormulaDAO" />
+	</bean>
+	
+	<bean id="StaffParamService" class="org.spes.service.staff.impl.StaffParamServiceImpl">
+	   <property name="staffParamDao" ref="StaffParamDAO" />
+	</bean>
+	
+	<bean id="StaffScoreService" class="org.spes.service.staff.impl.StaffScoreServiceImpl">
+	   <property name="staffScoreDao" ref="StaffScoreDAO" />
+	   <property name="staffFormulaDao" ref="StaffFormulaDAO" />
+	   <property name="staffParamDao" ref="StaffParamDAO" />
+	   <property name="staffItemDao" ref="StaffItemDAO" />
+	</bean>
+	
+	<bean id="MailSernderService" class="org.spes.service.mail.impl.MailSenderServiceImpl">
+	   <property name="javaMailSender" ref="javaMilSenderService" />
+	   <property name="velocityEngine" ref="velocityEngine" />
+	</bean>
+	<!-- by hegang end -->
+	<!-- Action -->
+	<bean id="LoginAction" class="org.spes.action.login.LoginAction" scope="prototype">
+	   <property name="userService" ref="UserService" />
+	</bean>
+	
+	<bean id="UserAction" class="org.spes.action.user.UserAction" scope="prototype">
+	  <property name="userService" ref="UserService" />
+	  <property name="mailService" ref="MailSernderService" />
+	</bean>
+	
+	<bean id="PwdAction" class="org.spes.action.user.PwdAction">
+	   <property name="userService" ref="UserService" />
+	</bean>
+	
+	<bean id="StaffAction" class="org.spes.action.user.StaffAction">
+	  <property name="userService" ref="UserService" />
+	</bean>
+	
+	<bean id="CenterResultAction" class="org.spes.action.result.CenterResultDisplay" scope="prototype">
+		<property name="resultService" ref="ResultService"></property>
+		<property name="actionService" ref="ActionService"></property>
+	</bean>
+	
+	<bean id="AvailbleWindowAction" class="org.spes.action.result.WindowResultDisplay" scope="prototype">
+		<property name="actionService" ref="ActionService"></property>
+		<property name="windowService" ref="WindowService"></property>
+		<property name="resultService" ref="ResultService"></property>
+	</bean>
+	<bean id="GetStaffAndScore" class="org.spes.action.result.StaffResultDisplay" scope="prototype">
+		<property name="actionService" ref="ActionService"></property>
+	<!-- 	<property name="staffService" ref="StaffService"></property> -->
+		<property name="resultService" ref="ResultService"></property>
+		
+	</bean>
+	<!-- wrh -->
+	<bean id="ReplyAction" class="org.spes.action.sys.ReplyAction">
+	   <property name="replyService" ref="ReplyService"></property>
+	</bean>
+	
+	<bean id="ConsultAction" class="org.spes.action.sys.ConsultAction">
+	   <property name="consultService" ref="ConsultService"></property>
+	</bean>
+	
+	<bean id="NoticeAction" class="org.spes.action.sys.NoticeAction">
+	   <property name="noticeService" ref="NoticeService" />
+	</bean>
+	<!-- end wrh -->
+	
+	<!-- by zsj -->
+	  <!-- Center start -->
+	<bean id="CenterAllPara" class="org.spes.action.center.CenterItemFirstLevelParaAction">
+	    <property name="centerItemService">
+	    	<ref bean="CenterItemSerive"/>
+	    </property>
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="CenterParamsRows" class="org.spes.action.center.CenterServiceDisplayRows">
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="CenterSenThirdItems" class="org.spes.action.center.CenterEditSenAndThirdParameters">
+	    <property name="centerItemService">
+	    	<ref bean="CenterItemSerive"/>
+	    </property>
+	    <property name="centerFormulaService" >
+	        <ref bean="CenterFormulaService"/>
+	    </property>
+	</bean>
+	<bean id="CenterItemEditor" class="org.spes.action.center.CenterItemEditor">
+	    <property name="centerItemService">
+	    	<ref bean="CenterItemSerive"/>
+	    </property>
+	</bean>
+	<bean id="CenterFormulas" class="org.spes.action.center.CenterFormulaHandler">
+	    <property name="centerFormulaService" >
+	        <ref bean="CenterFormulaService"/>
+	    </property>
+	    <property name="centerItemService">
+	    	<ref bean="CenterItemSerive"/>
+	    </property>
+	</bean>
+	    <!-- Center End -->
+	    <!-- Window Start -->
+	<bean id="WindowAllPara" class="org.spes.action.window.WindowItemFirstLevelParaAction">
+	    <property name="windowItemService">
+	    	<ref bean="WindowItemService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+	    </property>
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="WindowParamsRows" class="org.spes.action.window.WindowServiceDisplayRows">
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="WindowSenThirdItems" class="org.spes.action.window.WindowEditSenAndThirdParameters">
+	    <property name="windowItemService">
+	    	<ref bean="WindowItemService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+	    </property>
+	    <property name="windowFormulaService" >
+	        <ref bean="WindowFormulaService"/>
+	    </property>
+	</bean>
+	<bean id="WindowItemEditor" class="org.spes.action.window.WindowItemEditor">
+	    <property name="windowItemService">
+	    	<ref bean="WindowItemService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+	    </property>
+	</bean>
+	<bean id="WindowFormulas" class="org.spes.action.window.WindowFormulaHandler">
+	    <property name="windowFormulaService" >
+	        <ref bean="WindowFormulaService"/>
+	    </property>
+	    <property name="windowItemService">
+	    	<ref bean="WindowItemService"/>
+	    </property>
+	</bean>
+	    <!-- Window End -->
+	    <!--Staff Start -->
+	    <bean id="StaffAllPara" class="org.spes.action.staff.StaffFirstLevelParaAction">
+	    <property name="staffItemServie">
+	    	<ref bean="StaffItemService"/>
+	    </property>
+	    <property name="windowService">
+	    	<ref bean="WindowService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+	    </property>
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="StaffParamsRows" class="org.spes.action.staff.StaffServiceDisplayRows">
+	    <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="StaffSenThirdItems" class="org.spes.action.staff.StaffEditSenAndThirdParameters">
+	    <property name="staffItemService">
+	    	<ref bean="StaffItemService"/>
+	    </property>
+	    <property name="windowService">
+	    	<ref bean="WindowService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+        </property>
+        <property name="staffFormulaService">
+	    	<ref bean="StaffFormulaService"/>
+        </property>	    	
+        <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="StaffItemEditor" class="org.spes.action.staff.StaffItemEditor">
+	    <property name="staffItemServie">
+	    	<ref bean="StaffItemService"/>
+	    </property>
+	    <property name="windowService">
+	    	<ref bean="WindowService"/>
+	    </property>
+	    <property name="centerService">
+	    	<ref bean="CenterService"/>
+        </property>
+        <property name="userService">
+	    	<ref bean="UserService"/>
+	    </property>
+	</bean>
+	<bean id="StaffFormulas" class="org.spes.action.staff.StaffFormulaHandler">
+	   <property name="staffFormulaService">
+	    	<ref bean="StaffFormulaService"/>
+        </property>	 
+	</bean>
+	     <!-- Staff End -->
+	<!-- by zsj end -->
+	<!-- 中心注册 by DJ -->
+	<bean id="CenterRegisterService" class="org.spes.service.centerManage.impl.CenterRegisterServiceImpl">
+		<property name="dbProvinceDao">
+			<ref bean="BdProvinceDAO"/>
+		</property>
+		<property name="dbCityDao">
+			<ref bean="BdCityDAO"/>
+		</property>
+		<property name="dbcountyDao">
+			<ref bean="BdCountyDAO"/>
+		</property>
+		<property name="serviceCenterDao">
+			<ref bean="ServiceCenterDAO"/>
+		</property>
+		<property name="serviceCenterAuditDao">
+			<ref bean="ServiceCenterAuditDAO"/>
+		</property>
+	</bean>
+	<!--中心信息管理 by DJ -->
+	<bean id="CenterInfoManageService" class="org.spes.service.centerManage.impl.CenterInfoManageServiceImpl">
+		<property name="serviceCenterDao">
+			<ref bean="ServiceCenterDAO"/>
+		</property>
+	</bean>
+	
+	<!-- End Service -->
+	<bean id="RoleAction" class="org.spes.action.role.RoleAction">
+	   <property name="roleService" ref="RoleService" />
+	   <property name="actionService" ref="ActionService" />
+	   <property name="actionRoleService" ref="ActionRoleService" />
+	</bean>
+
+	<bean id="WindowAction" class="org.spes.action.common.WindowAction">
+	    <property name="windowService" ref="WindowService" />
+	    <property name="userService" ref="UserService" />
+	</bean>
+	
+	<bean id="CenterItemAction" class="org.spes.action.center.CenterItemAction">
+	    <property name="centerItemService" ref="CenterItemSerive"></property>
+	    <property name="centerScoreService" ref="CenterScoreService" />
+	    <property name="centerParamService" ref="CenterParamService" />
+	</bean>
+	
+	<bean id="CenterParamAction" class="org.spes.action.center.CenterParamAction">
+	   <property name="centerParamService" ref="CenterParamService"></property>
+	</bean>
+	<!-- 
+	<bean id="CenterFormulaAction" class="org.spes.action.center.CenterFormulaAction">
+	  <property name="centerFormulaService" ref="CenterFormulaService" />
+	</bean>
+	 -->
+	<bean id="CenterScoreAction" class="org.spes.action.center.CenterScoreAction" scope="prototype">
+	  <property name="centerScoreService" ref="CenterScoreService" />
+	</bean>
+	
+	<bean id="WindowItemAction" class="org.spes.action.window.WindowItemAction" scope="prototype">
+	  <property name="windowItemService" ref="WindowItemService" />
+	  <property name="windowScoreService" ref="WindowScoreService" />
+	</bean>
+	
+	<bean id="WindowScoreAction" class="org.spes.action.window.WindowScoreAction" scope="prototype">
+	   <property name="windowScoreService" ref="WindowScoreService" />
+	</bean>
+	
+	<bean id="StaffItemAction"  class="org.spes.action.staff.StaffItemAction" >
+	  <property name="staffItemService" ref="StaffItemService" />
+	  <property name="staffScoreService" ref="StaffScoreService" />
+	</bean>
+	
+	<bean id="StaffParamAction" class="org.spes.action.staff.StaffParamAction">
+	  <property name="staffParamService" ref="StaffParamService" />
+	</bean>
+	
+	<bean id="StaffScoreAction" class="org.spes.action.staff.StaffScoreAction" scope="prototype">
+	  <property name="staffScoreService" ref="StaffScoreService" />
+	</bean>
+	
+	<bean id="StaffFormulaAction" class="org.spes.action.staff.StaffFormulaAction" scope="prototype">
+	  <property name="staffFormulaService" ref="StaffFormulaService" />
+	</bean>
+	
+	<bean id="CenterAction" class="org.spes.action.centerManage.CenterAction">
+	   <property name="centerService" ref="CenterService" />
+	</bean>
+	
+	<!-- 中心注册Action by DJ-->
+	<bean id="CenterRegisterAction" class="org.spes.action.centerManage.CenterRegisterAction" scope="prototype">
+	    <property name="centerRegisterService" ref="CenterRegisterService"></property>
+	</bean>
+	
+	<bean id="CenterManageAction" class="org.spes.action.centerManage.CenterManageAction" scope="prototype">
+		<property  name="centerInfoManageService" ref="CenterInfoManageService"></property>
+	</bean>
+	
+	<bean id="SheetOperatorAction" class="org.spes.action.common.SheetOperatorAction">
+	    <property name="evaluateSheetService" ref="EvaluatesheetService"></property>
+	</bean>
+	
+	<bean id="ExportParameterAction" class="org.spes.action.common.ExportParameterAction">
+	    <property name="evaluateSheetService" ref="EvaluatesheetService"></property>
+	</bean>
+	<!-- End Action -->
+	</beans>

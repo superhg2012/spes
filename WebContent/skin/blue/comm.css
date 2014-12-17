@@ -1,0 +1,538 @@
+/*==================================================
+极易 2007.7 By ZR  zhuangrong2010#gmail.com
+===================================================*/
+/*
+如果内容在JAVA类中读出来，可以用id,显示样式
+#xqn{text-align:right; background:#000; height:30px; color:#ff0; font-size:30px}
+*/
+
+/* 全局CSS定义 主-296DC2; 边框-87A4C5 */
+/*html{overflow:hidden}*/
+
+body {margin:0; padding:0;font-family:"宋体",Arial,serif; font-size:12px}
+
+div,form,img,ul,ol,li,dl,dt,dd,textarea {margin: 0; padding: 0; border: 0;}
+ul,li{list-style-type:none}
+ul.DeptMember li{display:inline;width:70px;}
+h1,h2,h3,h4,h5,h6 { margin:0; padding:0;}
+h1{font-size:14px; text-align:left}
+table,td,tr,th{font-size:12px;}
+input,select{font-size:12px; padding:0; margin:0; vertical-align:middle}
+.clear{clear:both; margin:0; padding:0; font-size:1px; height:1px; visibility:hidden}
+.blank{ clear:both; margin:0; padding:0; font-size:1px; height:1px;}
+
+/* Table边框 */
+table.skinTab{border:none;border-top-width:1px;border-top-style:solid;border-left-width:1px;border-left-style:solid;}
+table.skinTab th{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;}
+table.skinTab td{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;}
+table.skinTab .over{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;cursor:pointer;}
+table.skinTab .filter{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;}
+table.skinTab .selected{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;} 
+
+/* AjaxPro Loading 信息*/
+#loadinfo{position:absolute;top:0;right:0;padding:3px;background-color:white;color:black;border-width:1px;border-Style:solid;}
+
+a{background:transparent;text-decoration: none;}
+a:hover{background:transparent;text-decoration:underline; }
+
+a.lineC{background:transparent;text-decoration: underline;}
+a.lineC:hover{background:transparent;text-decoration:underline; }
+
+a.lineC02{background:transparent;}
+a.lineC02:hover{background:transparent;text-decoration:underline; }
+
+/*Fix Float BUG 万能闭合*/
+.clearfix:after {
+ content: ".";
+ display: block;
+ height: 0;
+ clear: both;
+ visibility: hidden;
+}
+.clearfix{display:inline-block}
+
+.font12
+{
+ font-size:12px; 
+ font-weight:bold; 
+}
+.font14
+{
+ font-size:14px; 
+ font-weight:800; 
+}
+
+/*------全局CSS end---------*/
+.subBody{min-width:auto}
+
+.head{clear:both;height:90px; white-space:nowrap; overflow:hidden}
+.logo{float:left;height:90px;}
+.clock{position:absolute;top:6px;right:6px;}
+
+.flow{float:left;text-align:left;width:82px;position:relative;height:90px;}
+
+.bmsBg{float:right; text-align:right;width:580px;height:90px;}
+
+.hlep{clear:both; padding:30px 0 0 30px}
+.hlep img{ vertical-align:middle; margin:0 3px 3px 0}
+
+.line01{ height:3px; font-size:1px}
+
+.nav{clear:both; width:100%;}
+.nav .mb{clear:both;padding:4px 0 0;margin:0 auto;width:96%;}
+.nav .mb .xmbg{text-align:center;height:21px;line-height:21px;padding:2px 0 0;margin:2px 0 2px 0;cursor:pointer;} 
+.nav .mb ul,.signMenu ul{padding:0;}
+.nav .mb li,.signMenu ul li{text-align:left;padding:0;height:14px;margin-bottom:1px;}
+.nav .mb li a,.signMenu ul li a{display:block;text-decoration:none;height:14px;padding:0 0 0 10px;}
+.nav .mb li a img,.signMenu ul li a img{margin:0 5px -3px 0;border:0;}
+
+.leftLine{ width:100%; height:100%;}
+.showBg{width:100%}
+
+/*底部*/
+.footer{text-align:center; height:21px; padding:0;padding-top:6px;margin:0;line-height:1.4;}
+
+/*TreeView控件样式*/
+.TreeViewNode{padding:5px 0 0 0;}
+
+.EditMasterBorder{width:100%;height:1px;}
+
+
+/*------------------新  选项卡------------------------*/
+.option{clear:both; width:100%; padding:4px 0 0 0; height:23px;text-align:left;}
+.option ul{float:left;white-space:nowrap; overflow:hidden;width:80%;position:relative; z-index:19}
+.option li{display:-moz-inline-box;+display:inline;+zoom:1;_display:inline;_zoom:1;margin:0 2px 0 0;height:23px;line-height:23px;width:119px;text-align:center}
+.option li div{position:relative;cursor:default;font-size:12px;font-weight:normal;width:119px;text-align:center;white-space:nowrap;}
+.option li img{display:none;position:absolute;top:2px; right:1px;cursor:pointer}
+.option li.current02a div{font-weight:bold}
+.option li.current02a div img{display:block}
+
+.option .opHide{float:left; width:33px; padding:2px 0 0 10px}
+.option .opHide img{ border:0; cursor:pointer}
+
+.navArrow{float:right; width:68px;padding:3px 0 0 0;margin:0 3px 0 0;}
+.navArrow img{ border:0; cursor:pointer}
+
+/*------------------新 选项卡------------------------*/
+
+
+/*操作*/
+.tools{clear:both;height:20px;padding:3px 0 6px 12px}
+.tools ul{float:left}
+.tools li{float:left;height:21px;margin:0;padding:3px 12px 0 0;cursor:pointer}
+.tools li img{margin:0 3px -3px 0}
+/*操作*/
+.tools2{clear:both;  border-bottom:none; height:20px; padding:5px 0  0; margin:0 auto; text-align:center}
+.tools2 .t01 .add01{cursor:pointer}
+.tools2 .t01 .del01{cursor:pointer}
+.tools2 .t01 .save01{cursor:pointer}
+.tools2 .t01 .cx01{cursor:pointer}
+.tools2 .t01{ width:458px; margin:0 auto;}
+.tools2 .t01 span{display:block; float:left;width:41px; height:15px; margin:0 36px; display:inline}
+
+.listBk{clear:both; padding:0;margin:0;overflow:hidden;}
+/*列表*/
+.list{clear:both;overflow:hidden;}
+.list th{height:21px; white-space:nowrap;padding:0px 0 0 0;font-weight:bold;font-size:12px;}
+.list th img{vertical-align:middle}
+.list th.sortRw{cursor:pointer}
+.list td{white-space:nowrap;padding:0px 6px 0 8px;cursor:pointer;overflow:hidden;text-overflow:ellipsis; height:18px;}
+.list .selected{cursor:pointer;}
+.list .title{text-align:left}
+.list td.oprate{text-align:left; padding:0 3px}
+.list td.oprate img{margin:0 1px; cursor:pointer; vertical-align:middle}
+.list td.info{padding:3px}
+.list .tab02 td{ white-space:normal}
+.list .tab02 td.opTime{text-align:center}
+.list .tab02 a{background:transparent;text-decoration: none;}
+.list .tab02 a:hover{background:transparent;text-decoration:underline;}
+/*表格下面按钮栏*/
+.option_bottom{clear:both;text-align:right;margin:0;padding:0;}
+
+.list .xxkTit{clear:both;height:23px; margin:0 auto; line-height:23px}
+.list .xxkTit div{ white-space:nowrap; width:150px;cursor:default;font-size:12px;text-align:center;font-weight:bold; }
+.sortBtn input{margin:5px 0 0}
+.sideBlank{width:33px;}
+
+/*边栏目*/
+.sideBar{position:relative;width:33px}
+
+.search1{position:absolute; top:63px; left:5px;width:28px; height:73px;cursor:pointer;z-index:2}
+.search2{position:absolute; top:63px; left:5px;width:28px; height:73px;cursor:pointer}
+
+.nav1{position:absolute; top:1px; left:5px;width:28px; height:73px;cursor:pointer}
+.nav2{position:absolute; top:1px; left:5px;width:28px; height:73px;cursor:pointer}
+
+.report1{position:absolute; top:125px; left:5px;width:28px; height:73px;cursor:pointer;z-index:1}
+.report2{position:absolute; top:125px; left:5px;width:28px; height:73px;cursor:pointer}
+
+.set1{position:absolute; top:187px; left:5px;width:28px; height:73px;cursor:pointer;z-index:0}
+.set2{position:absolute; top:187px; left:5px;width:28px; height:73px;cursor:pointer}
+
+.soso{clear:both; width:213px}
+.soso .mb2{clear:both; padding:4px 0 0;margin:0 auto;overflow:auto;width:213px}
+.soso .mb2 td{text-align:left; height:23px}
+.soso .mb2 .sel{width:94px; height:18px;*height:20px}
+.soso .mb2 td.tit{ text-align:right; width:68px}
+.soso .mb2 td.timePadd{ text-align:right; padding:0 4px 0 0}
+.soso .mb2 .switch{ cursor:pointer}
+.soso .mb2 .ipt01{width:92px; height:16px; padding:2px 0 0}
+.soso .mb2 .rq{width:76px}
+
+
+.cbox{ border:none; width:16px; height:16px; vertical-align:middle; margin:0 0 3px; border:none}
+.topBk{ clear:both; width:1003px}
+
+/*翻页*/
+.pageNext{clear:both; text-align:right; height:25px;margin-top:6px;}
+.pageNext .ipt01{clear:both;font-size:12px;width:30px;height:15px;padding-top:4px;margin:0 0 4px}
+.pageNext .btn{border:0;width:24px;height:21px; font-size:12px;padding-top:4px;margin:0 0 4px;margin-right:5px;}
+
+/*任务登记*/
+.task{clear:both; padding:20px 0 0}
+.task table{margin:0 auto}
+.task td{height:22px}
+.task td.tit{width:78px;padding:0 5px 0 0}
+.task td.paddLeft{width:198px}
+.task .ipt01{width:116px; height:16px; padding:2px 0 0}
+.task .ipt05{width:118px;height:18px;*height:20px}
+.task .ipt02{width:558px;height:16px; padding:2px 0 0}
+.task .ipt03{width:558px;height:66px;font-size:12px; vertical-align:top}
+.task .ipt06{width:70px; height:16px; padding:2px 0 0}
+.task .ipt07{width:70px; padding:1px}
+.task .time01{width:58px;height:18px;*height:20px}
+.task input{wd01:expression(this.style.backgroundColor=this.must=="must"?"#eee":"");}
+
+/*兼容firefox*/
+.task input[must="must"]{background:#eee}
+
+.task .xxkTit div{cursor:default;font-size:12px;font-weight:bold;text-align:center}
+.task .textaH{height:68px; padding:0 0 0 1px}
+.task .tabBank{ height:10px; font-size:1px}
+.task .fontColor{ border:none}
+.task .xxkTit{clear:both;height:23px; margin:0 auto; line-height:23px;}
+.task .xxkTit div{width:150px; white-space:nowrap}
+.task td.toph{ height:3px; font-size:1px}
+.task td img{ vertical-align:middle; cursor:pointer}
+.task .yfglAdd{clear:both; padding:10px 0 0; margin:0 auto;text-align:left}
+.task .yfglAdd th{height:25px; white-space:nowrap; padding:0 8px;font-weight:normal}
+.task .yfglAdd .xmjsTh{padding:3px 0 0; height:22px;text-align:center}
+.task .yfglAdd .xmjsTh input{ margin:0 0 3px; vertical-align:middle}
+.task .yfglAdd .xmjsTd{height:17px; padding:3px 0 3px 4px; text-align:center}
+.task .yfglAdd .xmjsTd .ipt01{width:72px}
+.task .yfglAdd table{border:none}
+.task .yfglAdd td{text-align:center;height:26px; vertical-align:top}
+.task .yfglAdd td.yfgl{ text-align:center; vertical-align:middle}
+.task .yfglAdd td select{height:18px}
+.task .yfglAdd .ipt08{width:120px}
+.task .yfglAdd .ipt09{width:292px}
+.task .yfglAdd .ipt10{width:198px}
+.task .nonePic{border:1px solid #ccc}
+
+.task .lcxx td{text-align:center}
+.task .lcxx th{height:23px;white-space:nowrap;padding:0 8px; font-weight:normal}
+.task .lcxx a{background:transparent;text-decoration: none;}
+.task .lcxx a:hover{background:transparent;text-decoration:underline; }
+
+.task .sortBox{width:224px;height:168px;overflow: hidden;position:relative}
+.task .sortLine{width:230px;height:187px;position:absolute;left:-3px; top:-3px;}
+
+.task .rwm{word-break:break-all; height:48px}
+.task .down{text-align:left; padding:0 0 0 30px}
+.task .down img{ vertical-align:middle}
+.task td.qx{ height:35px; text-align:left; padding:0 0 0 30px}
+
+.task .fjPadd{padding:2px 0 3px 72px;*padding:2px 0 3px 87px;_padding:2px 0 3px 87px}
+
+.task .fileinputs input{background:transparent;border:none;width:1px;*width:0;_width:0;height: 20px; cursor:pointer}
+.task .fileinputs input:focus {background: transparent}
+.task .fileinputs {position:relative;height:30px;width:100px;}
+.task .file {width:18px;margin: 0;}
+.task .file.hidden {position: relative;text-align: right;-moz-opacity:0;filter:alpha(opacity: 0);opacity: 0;z-index: 2;}
+.task .fakefile {position: absolute;top: 0;left: 15px;*left: 0;_left: 0;padding: 0;margin: 0;z-index: 1;line-height: 90%}
+.task .fakefile input{margin-bottom: 5px;margin-left: 0; }
+.task .fakefile2 {position: absolute;top: 3px;left: 28px;*left: 42px;_left: 42px;padding: 0;margin: 0;z-index: 1;line-height: 90%;}
+.task .addPic{text-align:left;padding:3px 0 0 2px;*padding:0 0 0 10px;_padding:3px 0 0 32px}
+.task .picBk{clear:both; padding:12px 0 0}
+.task td.sjzd{vertical-align:middle}
+.task td.sjzd input{ margin:3px 0}
+
+.fjBk{clear:both;text-align:center}
+/*附件*/
+.fuj{clear:both; padding:6px 0 0;text-align:center; }
+.fuj table{margin:0 auto}
+
+.fileh{ width:350px; height:18px;}
+.fileSel{width:285px; height:16px}
+.save{clear:both; text-align:center; padding:10px 0; height:20px}
+.save input{margin:0 6px}
+
+/*按钮样式*/
+.bt{border:0;width:53px;height:21px;_padding:4px 0 0; cursor:pointer}
+.dt{border:0;width:58px;height:21px;_padding:4px 0 0; cursor:pointer}
+.bt4{border:0; width:68px;height:21px;_padding:4px 0 0; cursor:pointer}
+.bt6{border:0; width:86px;height:21px;_padding:4px 0 0; cursor:pointer}
+.btGo{border:0;width:24px;height:21px; font-size:14px; letter-spacing:2px}
+
+/*报表树*/
+.bbTree{clear:both;text-align:left;width:148px; padding:3px 0 0 3px; overflow:auto}
+.bbTree p{ margin:0; padding:0}
+.soBottom{clear:both;height:25px;text-align:center;}
+
+.glTree{clear:both;text-align:left;width:147px; padding:3px 0 0 3px; overflow:auto; white-space:nowrap}
+.glTree p{ clear:both;margin:0; padding:0}
+.glBottom{clear:both;height:25px; width:175px;text-align:center;}
+
+/*弹出层的样式*/
+.winTop01{height:26px}
+.winTop02{font-weight:bold}
+.winTop03{cursor:pointer}
+.winTop031{cursor:pointer;}
+.winMid02{cursor:pointer}
+.winBot01{height:5px;font-size:1px}
+.winBot02{height:5px;font-size:1px}
+.winBot03{height:5px;font-size:1px}
+
+/*框架隐藏*/
+.has{height:42px;width:9px;cursor:pointer}
+.has02{height:42px;width:9px;cursor:pointer}
+.vhas{height:9px;width:42px;cursor:pointer}
+.vhas02{height:9px;width:42px;cursor:pointer}
+
+.yfglBk{ clear:both; width:100%;  overflow:auto}
+
+.title022{ padding:2px 0 0;white-space: nowrap;padding-left:8px;padding-right:8px;font-weight:bold;text-align:center;cursor:pointer	}
+.title022b{padding:2px 0 0;white-space: nowrap;padding-left:8px;padding-right:8px;font-size:13px;text-align:center;cursor:pointer}
+
+/*用户管理--角色*/
+
+/*报表打印*/
+.printC{cursor:pointer}
+.lhead{font-weight:bold;text-align:center;font-size:16px}
+.printAlgin{text-align:center;height:21px; width:58px; padding:0 0 3px}
+.printAlgin .imgm{margin:0 3px 3px 0}
+.printAlgin input{ vertical-align:middle}
+.cxAlign{ width:125px;padding:0 0 3px; vertical-align:bottom; text-align:center}
+.headTop{font-weight:bold;height:58px;vertical-align:top;text-align:center;padding:8px 0 0;font-size:24px}
+.printBk{BORDER-COLLAPSE:collapse}
+.printBk td{text-align:center; font-size:16px; font-weight:bold}
+.printBk td.bbbz{text-align:left; padding:25px 0 0 30px;height:132px}
+.printBk td.tl{ text-align:left; padding:0 15px}
+.printBk td.tl2{ text-align:left; padding:0 0 0 10px}
+
+.font10{height:21px;font-size:10pt;vertical-align:top}
+.printPadd{background:transparent;padding:0 10px}
+.drag{position:relative;cursor:move} 
+.printBreak{word-break:break-all; white-space:normal}
+
+.showQQ a{text-decoration:underline}
+
+.update{position:absolute;width:80px;top:60px;left:-360px;text-align:right;font-size:12px;}
+.update img{ border:0; margin:0 3px -3px 0;}
+
+/*任务名截断*/
+.rwmJd01{ clear:both; text-align:left;width:368px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rwmJd02{ text-align:left;}
+.dateWidth{width:52px; padding:2px 0 0; height:16px}
+
+/*没有权限*/
+.noRight{clear:both; margin:0 auto; width:369px; height:176px;}
+.noRight .t01{ clear:both; padding:55px 0 0 118px; font-size:30px}
+.noRight .t02{ clear:both; text-align:right; padding:58px 18px 0 0}
+
+/*没有角色*/
+.noMan{clear:both; margin:0 auto; width:369px; height:176px;}
+.noMan .t01 font{font-size:18px}
+.noMan .t01{clear:both; padding:65px 0 0 205px; font-size:20px}
+.noMan .t02{ clear:both; text-align:right; padding:58px 18px 0 0}
+
+#ss{text-align:left}
+
+/*皮肤*/
+.face{clear:both; margin:0 auto; width:100%; padding:20px 10px 10px; height:203px; border:0px #000000 solid; text-align:center}
+.face img{display:block; margin:0 0 6px}
+.face .current{font-weight:bold; cursor:pointer}
+.face .cheH{ height:111px;*height:90px;_height:90px;padding:20px 0 0; vertical-align:top}
+.face table{ text-align:center; margin:0 auto; clear:both;}
+.face td{cursor:pointer}
+.face .t01{ clear:both; text-align:center; padding:10px 0 0}
+
+/*卡片右键菜单*/
+.menu2{width:99px; height:100px; padding:3px 6px 3px 2px;}
+.menu2 li{height:20px;padding:4px 0 0;cursor:default; }
+.menu2 li img{border:0; margin:0 4px -3px 3px}
+
+.cboxH{margin:0 3px 4px 0; width:20px;  height:20px;}
+
+/*进度条*/
+.uploadbg,.uploadbg02,.uploadbg03,.uploadbg04,.uploadbg05,.uploadbg06{ font-size:15px}
+.upLoadBk{position:absolute;top:80px; left:30px;width:500px;height:138px;z-index:99}
+.upLoadBk span{ margin:0; padding:0; border-left:1px solid #fff}
+.loadColor{height:18px;*height:17px;_height:17px;width:300px;font-size:15px}
+
+.PageNext{page-break-after: always;}
+
+/*------------------------bms 5.1新增的样式--------------------------------------*/
+.fzzdN01{padding:5px}
+.timeWidth{width:62px}
+.headN01{ height:5px}
+
+/*快速查询*/
+.kscx{clear:both;}
+.kscx .cxBg0{clear:both;cursor:pointer;height:23px;text-align:left}
+.kscx .cxBg1{clear:both;cursor:pointer;height:23px;text-align:left}
+.kscx .cxBg2{clear:both;cursor:pointer;height:23px;text-align:left}
+.kscx .ksbg li{ float:left; width:50px; display:inline; height:20px; padding:3px 0 0; line-height:20px; text-align:center;}
+.kscx .mb{clear:both; width:199px; margin:0 auto; padding:7px 0 0}
+.kscx .mb .cxOp{clear:both;height:22px;}
+.kscx .mb .cxOp li{float:left; width:61px; height:18px; line-height:18px; padding:2px 0 0; text-align:center;cursor:pointer;}
+.kscx .mb .cxOp li.current{height:19px;line-height:19px;}
+.kscx .mb .cxCon{clear:both;padding:6px;  text-align:left; overflow:auto}
+.kscx .mb .cxCon p{ margin:0; padding:0}
+.kscx .mb .cxCon02{clear:both;padding:6px 0 0;  text-align:center; height:206px; overflow:auto}
+.kscx .mb .cxCon02 .cxTime1{padding:0 0 0 6px; text-align:left}
+.kscx .mb .cxCon02 .cxTime1 p{ margin:0; padding:0}
+
+.soso .mb2 .wdcx{clear:both;padding:0 8px 0 10px;}
+.soso .mb2 .wdcx .cxNum{ width:16px}
+.soso .mb2 .wdcx .cxWrap{height:15px;width:150px; padding:6px 0 0; text-align:left; overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.soso .mb2 .wdcx .padd01{height:18px;padding:3px 0 0 5px}
+.soso .mb2 .wdcx .padd01 img{cursor:pointer; vertical-align:middle}
+/*日期搜索切换*/
+.timeSo{clear:both;height:18px; padding:1px 0 0 10px}
+.timeSo li{float:left;width:55px; height:15px; line-height:15px; padding:2px 0 0; text-align:center;cursor:pointer;}
+
+.timeYs{ clear:both;padding:0 0 5px}
+.timeYs select{ width:130px}
+.timeYs a{ text-decoration:underline}
+.tm02{padding-left:12px}
+
+.timeCon{clear:both;padding:3px 0 0;*padding:6px 0 0;_padding:6px 0 0;}
+/*查询日期*/
+#calender {width:178px; margin:0 auto;z-index:10;}
+#control {clear:both;text-align:left;overflow:hidden; height:22px; padding:0 0 0 20px; margin:0}
+#control select{float:left;margin:0 0 0 7px;}
+#calender .controlPlus{ float:left; display:block; width:13px; height:20px; text-align:center;text-decoration:none;}
+#calender .controlPlus2{ float:left; display:block; width:20px; height:20px; text-align:center;text-decoration:none;}
+#calender table {empty-cells: show;width:176px; margin:0 auto;font-size:11px;table-layout:fixed;}
+#calender .weekdays td{text-align:right;padding:0 5px 0 1px;font-weight:bold}
+#calender .week td {text-align:right;cursor:pointer;padding:2px 6px 1px 0; height:15px;}
+#calender .week .holiday {font-weight: bold;}
+
+/*任务视图*/
+.list .viewTit{clear:both; height:23px; padding:5px 0 0 10px; font-size:14px; font-weight:bold; text-align:left; cursor:pointer} 
+.list .viewTit img{vertical-align:middle; cursor:pointer}
+.list .viewTit font{ font-size:12px; font-weight:normal; font-weight:bold}
+
+/*月选择*/
+.seleMonth{clear:both; width:192px; margin:0 auto}
+.seleMonth td{text-align:center; height:25px; padding:3px 0 0}
+.seleMonth th{text-align:center; height:28px;}
+.seleMonth a{text-decoration:none}
+.seleMonth a:hover{text-decoration:none}
+/*周选择*/
+.seleWeek{clear:both;}
+.seleWeek .c01{font-size:12px;}
+.seleWeek .controlPlus{width:13px; height:13px; cursor:pointer}
+.seleWeek .controlPlus2{width:13px; height:13px; cursor:pointer}
+
+/*树选择页面*/
+.seleTree{clear:both;overflow:auto}
+.seleTree p{margin:0;padding:0}
+
+/*报表输入框*/
+.tjbPadd{padding:0 0 0 15px}
+.tjbPadd .ipt01{width:86px; height:16px; padding:2px 0 0; vertical-align:middle; margin:0 0 3px}
+.tjbPadd select{height:18px;*height:20px; vertical-align:middle; margin:0 0 3px}
+.tjbPadd img{ vertical-align:middle; margin:0 0 3px}
+.tjbPadd .i2{width:56px}
+.tjbPadd .i3{width:73px}
+.tjbPadd .i4{width:71px}
+.tjbPadd .t01{height:25px}
+
+/*进度条*/
+.uploadbg1{font-size:15px}
+.uploadbg021{font-size:15px}
+.uploadbg031{font-size:15px}
+.uploadbg041{font-size:15px}
+.uploadbg051{font-size:15px}
+.uploadbg061{font-size:15px}
+.upLoadBk1{position:absolute;top:33px; z-index:99; left:35px;width:500px;height:130px}
+.loadLine{height:18px;*height:17px;_height:17px;width:300px;font-size:1px;}
+
+
+/*自定义*/
+#mainMenu ul
+{
+    width:510px;
+    margin:32px auto;
+}
+#mainMenu ul li
+{
+    width:90px;
+    height:90px;
+    float:left;
+    margin-left:30px;
+    display:inline;
+}
+#mainMenu ul li a
+{
+    display:block;
+}
+#mainMenu ul li a img
+{
+    padding:1px;
+}
+#mainMenu ul li span a {
+    width:90px;
+    height:30px;
+    line-height:24px;
+    text-align:center;
+    white-space:nowrap;
+    text-overflow:ellipsis; 
+    overflow: hidden;
+}
+
+
+/***/
+.ReptTitle
+{
+	 font-size:23px; 
+	 text-align:center;
+}
+
+/*=================crm 样式================*/
+
+/*选项卡*/
+.selectCard{clear:both; width:100%; padding:0px 0 0 0; height:23px;text-align:left;}
+.selectCard ul{float:left;white-space:nowrap; overflow:hidden;width:80%;position:relative; z-index:19}
+.selectCard li{display:-moz-inline-box;+display:inline;+zoom:1;_display:inline;_zoom:1;margin:0 2px 0 0;height:23px;line-height:23px;width:119px;text-align:center}
+
+
+/* Table边框 */
+table.crmTab{border:none;border-top-width:1px;border-top-style:solid;border-left-width:1px;border-left-style:solid;}
+table.crmTab td{border:none;border-right-width:1px;border-right-style:solid;border-bottom-width:1px;border-bottom-style:solid;}
+
+/*=================crm 样式================*/
+
+/* -------------------放list样式--------------------- */
+
+/*列表*/
+.listul{clear:both;overflow:auto;}
+.listul th{height:21px; white-space:nowrap;padding:0px 0 0 0;font-weight:bold;font-size:12px;}
+.listul th img{vertical-align:middle}
+.listul th.sortRw{cursor:pointer}
+.listul td{text-align:center;padding:0px 6px 0 8px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;}
+.listul .selected{cursor:pointer;}
+.listul .title{text-align:left}
+.listul td.oprate{text-align:left; padding:0 3px}
+.listul td.oprate img{margin:0 1px; cursor:pointer; vertical-align:middle}
+.listul td.info{padding:3px}
+.listul .tab02 td{ white-space:normal}
+.listul .tab02 td.opTime{text-align:center}
+.listul .tab02 a{background:transparent;text-decoration: none;}
+.listul .tab02 a:hover{background:transparent;text-decoration:underline;}
+.listul .xxkTit{clear:both;height:23px; margin:0 auto; line-height:23px}
+.listul .xxkTit div{ white-space:nowrap; width:150px;cursor:default;font-size:12px;text-align:center;font-weight:bold; }
+
+/* -------------------放list样式--------------------- */
