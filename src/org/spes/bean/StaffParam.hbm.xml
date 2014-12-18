@@ -31,14 +31,14 @@
         <property name="centerId" type="java.lang.Integer">
             <column name="centerId" />
         </property>
-        <property name="backup1" type="java.lang.String">
-            <column name="backup1" length="30" />
+        <property name="evaluated" type="java.lang.String">
+            <column name="evaluated" length="30" />
         </property>
-        <property name="backup2" type="java.lang.String">
-            <column name="backup2" length="30" />
+        <property name="sheetType" type="java.lang.String">
+            <column name="sheetType" length="30" />
         </property>
-        <property name="backup3" type="java.lang.String">
-            <column name="backup3" length="30" />
+        <property name="sheetId" type="java.lang.String">
+            <column name="sheetId" length="30" />
         </property>
         <property name="backup4" type="java.lang.String">
             <column name="backup4" length="30" />

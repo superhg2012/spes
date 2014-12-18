@@ -18,9 +18,9 @@ public class StaffParam implements java.io.Serializable {
 	private Integer userId;
 	private Integer windowId;
 	private Integer centerId;
-	private String backup1;
-	private String backup2;
-	private String backup3;
+	private String evaluated;
+	private String sheetType;
+	private String sheetId;
 	private String backup4;
 	private String backup5;
 
@@ -33,8 +33,8 @@ public class StaffParam implements java.io.Serializable {
 	/** full constructor */
 	public StaffParam(String itemName, Double itemValue,
 			Timestamp evaluateDate, Integer itemId, Integer userId,
-			Integer windowId, Integer centerId, String backup1, String backup2,
-			String backup3, String backup4, String backup5) {
+			Integer windowId, Integer centerId, String evaluated,
+			String sheetType, String sheetId, String backup4, String backup5) {
 		this.itemName = itemName;
 		this.itemValue = itemValue;
 		this.evaluateDate = evaluateDate;
@@ -42,9 +42,9 @@ public class StaffParam implements java.io.Serializable {
 		this.userId = userId;
 		this.windowId = windowId;
 		this.centerId = centerId;
-		this.backup1 = backup1;
-		this.backup2 = backup2;
-		this.backup3 = backup3;
+		this.evaluated = evaluated;
+		this.sheetType = sheetType;
+		this.sheetId = sheetId;
 		this.backup4 = backup4;
 		this.backup5 = backup5;
 	}
@@ -115,28 +115,28 @@ public class StaffParam implements java.io.Serializable {
 		this.centerId = centerId;
 	}
 
-	public String getBackup1() {
-		return this.backup1;
+	public String getEvaluated() {
+		return evaluated;
 	}
 
-	public void setBackup1(String backup1) {
-		this.backup1 = backup1;
+	public void setEvaluated(String evaluated) {
+		this.evaluated = evaluated;
 	}
 
-	public String getBackup2() {
-		return this.backup2;
+	public String getSheetType() {
+		return sheetType;
 	}
 
-	public void setBackup2(String backup2) {
-		this.backup2 = backup2;
+	public void setSheetType(String sheetType) {
+		this.sheetType = sheetType;
 	}
 
-	public String getBackup3() {
-		return this.backup3;
+	public String getSheetId() {
+		return sheetId;
 	}
 
-	public void setBackup3(String backup3) {
-		this.backup3 = backup3;
+	public void setSheetId(String sheetId) {
+		this.sheetId = sheetId;
 	}
 
 	public String getBackup4() {
