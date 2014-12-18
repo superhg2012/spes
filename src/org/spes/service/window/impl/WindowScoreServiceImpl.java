@@ -162,8 +162,9 @@ public class WindowScoreServiceImpl implements WindowScoreService {
 							wp.setItemValue(json.getDouble("itemValue"));
 							wp.setCenterId(json.getInt("centerId"));
 							wp.setWindowId(json.getInt("windowId"));
-							wp.setBackup2(sheetType);
-							wp.setBackup3(sheetId);
+							wp.setEvaluated("true");
+							wp.setSheetType(sheetType);
+							wp.setSheetId(sheetId);
 							
 							wp.setEvaluateDate(new Timestamp(new Date().getTime()));
 							set.add(wp);

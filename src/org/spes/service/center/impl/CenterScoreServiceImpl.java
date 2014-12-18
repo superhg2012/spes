@@ -412,8 +412,9 @@ public class CenterScoreServiceImpl implements CenterScoreService {
 							cp.setItemValue(json.getDouble("itemValue"));
 							cp.setCenterId(json.getInt("centerId"));
 							cp.setEvaluateDate(new Timestamp(new Date().getTime()));
-							cp.setBackup2(checkType);
-							cp.setBackup3(sheetName);
+							cp.setEvaluated("true");
+							cp.setSheetType(checkType);
+							cp.setSheetId(sheetName);
 							set.add(cp);
 							
 							String itemName = json.getString("itemName");
@@ -560,8 +561,9 @@ public class CenterScoreServiceImpl implements CenterScoreService {
 							cp.setItemValue(json.getDouble("itemValue"));
 							cp.setCenterId(json.getInt("centerId"));
 							cp.setEvaluateDate(new Timestamp(new Date().getTime()));
-							cp.setBackup2(sheetType);//month
-							cp.setBackup3(sheetId.toString());
+							cp.setEvaluated("true");
+							cp.setSheetType(sheetType);//month
+							cp.setSheetId(sheetId.toString());
 							set.add(cp);
 							
 							String itemName = json.getString("itemName");
