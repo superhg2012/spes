@@ -7,6 +7,14 @@ import org.spes.bean.CenterItem;
 
 public interface CenterItemService {
 	
+	/**
+	 * 获取某一级指标下的二级指标
+	 * @param itemId
+	 * @return
+	 */
+	public List<CenterItem> getSecondLevelParameterOfFirst(int itemId, int centerId);
+	
+	public List<CenterItem> getThirdLevelParameterOfSecond(int itemId, int centerId);
 	
 	public List<CenterItem> getAllParameterOfCenter(int centerId);
 	/**

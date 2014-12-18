@@ -151,4 +151,12 @@ public interface CenterItemDAO {
 	 * @return
 	 */
 	public List<CenterItem> findByItemIdAndCenterId(Integer itemId, Integer centerId);
+	
+	/**
+	 * 依据指标parentId与中心Id查找指标
+	 * @param parentId
+	 * @param centerId
+	 * @return
+	 */
+	public List<CenterItem> findByParentIdAndCenterId(Integer parentId, Integer centerId);
 }

@@ -48,4 +48,10 @@ public class CenterParamServiceImpl implements CenterParamService {
 		return centerParamDao.findCenterParamByParams(itemId, centerId, checkType, sheetName, userName);
 	}
 
+	@Override
+	public CenterParam getParamByIds(Integer itemId, Integer centerId,
+			Integer sheetId) {
+		return centerParamDao.findThirdLevelParamByIds(itemId, centerId, sheetId);
+	}
+
 }

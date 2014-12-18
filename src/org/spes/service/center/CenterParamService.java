@@ -9,6 +9,8 @@ public interface CenterParamService {
 	
 	public CenterParam getParamById(Integer itemId, Integer centerId);
 	
+	public CenterParam getParamByIds(Integer itemId, Integer centerId, Integer sheetId);
+	
 	/**
 	 * 保存三级指标得分
 	 * @param set

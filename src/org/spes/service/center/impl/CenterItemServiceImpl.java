@@ -138,6 +138,15 @@ public class CenterItemServiceImpl implements CenterItemService {
 		return centerItemDao.findByProperty("centerId", centerId);
 	}
 
-	
+	@Override
+	public List<CenterItem> getSecondLevelParameterOfFirst(int itemId,
+			int centerId) {
+		return centerItemDao.findByParentIdAndCenterId(itemId, centerId);
+	}
 
+	@Override
+	public List<CenterItem> getThirdLevelParameterOfSecond(int itemId,
+			int centerId) {
+		return centerItemDao.findByParentIdAndCenterId(itemId, centerId);
+	}
 }
