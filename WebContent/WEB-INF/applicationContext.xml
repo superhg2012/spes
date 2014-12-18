@@ -614,6 +614,8 @@
 	 -->
 	<bean id="CenterScoreAction" class="org.spes.action.center.CenterScoreAction" scope="prototype">
 	  <property name="centerScoreService" ref="CenterScoreService" />
+	  <property name="centerItemService" ref="CenterItemSerive" />
+	  <property name="centerParamService" ref="CenterParamService" />
 	</bean>
 	
 	<bean id="WindowItemAction" class="org.spes.action.window.WindowItemAction" scope="prototype">

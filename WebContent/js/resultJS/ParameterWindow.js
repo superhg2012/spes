@@ -20,14 +20,15 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 	
 	beforeShow : function() {
 		var self = this;
-		self.setTitle('PARAMETER CONFIGURATION (MO Name : ' + self.sheetId + ')');
-		self.createParamTree();
-		//self.createParamTable(self.sheetId); // display table
+		self.setTitle('中心考核结果 (表单名 : ' + self.sheetId + ')');
+		self.createParamTree(self.sheetId);
+		var tabPanel = self.getComponent('tabPanel');
+		tabPanel.setTitle("中心考核结果");
 	},
 	
-	createParamTree : function () {
+	createParamTree : function (sheetId) {
 		var self = this;
-		var tabPanel = this.getComponent('tabPanel');
+		var tabPanel = self.getComponent('tabPanel');
 		  //中心指标树
 		 var itemroot = new Ext.tree.AsyncTreeNode({
 			id : 'itemroot',
@@ -80,10 +81,10 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 	    	if(node !=null){
 	    		store.removeAll();
 	    		Ext.Ajax.request({
-	    		  url : 'sys/centerItemAction!getHisCenterItemByItemId.action',
+	    		  url : 'center/centerScoreAction!getHisCenterItemScore.action',
 	    		  method : 'POST',
 	    		  scope : this,
-	    		  params : {'itemId' : itemId,"centerId" : centerId, sheetId : this.sheetId},
+	    		  params : {'itemId' : itemId,"centerId" : centerId, sheetId :sheetId},
 	    		  callback : function(options, success, response){
 	    		    if(success){
 	    		      var json = Ext.util.JSON.decode(response.responseText);

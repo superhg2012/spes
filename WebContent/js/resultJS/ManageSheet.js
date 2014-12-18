@@ -21,7 +21,7 @@ var ManageSheet = (function (){
     var buttonRender = function (value, metadata, record, rowIndex, colIndex, store) {
     	var formattedPosition = "";
 		formattedPosition += '&nbsp; &nbsp;&nbsp;&nbsp;';
-  	    formattedPosition += '<a title="ÏêÏ¸¿¼ºËÐÅÏ¢" style="cursor:pointer;" href="javascript:void(0);" onclick="ManageSheet.onClickDisplaySheetDetailInfos(\'' + value + '\');"><i class="icon-zoom-in"></i></a>';
+  	    formattedPosition += '<span title="ÏêÏ¸¿¼ºËÐÅÏ¢" style="cursor:pointer;" onclick="ManageSheet.onClickDisplaySheetDetailInfos(\'' + value + '\');"><i class="icon-zoom-in"></i></span>';
 		return formattedPosition;
     };
     
@@ -129,7 +129,7 @@ var ManageSheet = (function (){
 			});
 		win.show();
 		win.center();
-		return false;
+		//return false;
 	};
 	
 	return my;

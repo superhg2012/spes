@@ -33,6 +33,9 @@ public interface CenterParamDAO {
 	 * @return
 	 */
 	public CenterParam findThirdLevelParamByIds(Integer itemId, Integer centerId, Integer sheetId);
+	
+	
+	/**
 	 * 依据指标名称与中心ID获取三级指标参数
 	 * 
 	 * @param itemName
