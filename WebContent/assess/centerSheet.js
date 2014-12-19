@@ -1,6 +1,6 @@
 Ext.onReady(function(){
 		
-       /*列模型中渲染的按钮*/  
+       /*render button in columns*/  
 	    var operateRender = function cancel(value, metadata, record, rowIndex, colIndex, store){
 	    	
 	    	var cancelButton='<TABLE class="x-btn-wrap x-btn x-btn-text-icon" id=save style="WIDTH:55px" cellSpacing=0 cellPadding=0 border=0>';  
@@ -38,7 +38,7 @@ Ext.onReady(function(){
 	    	return formatedValue;
 	    };
 	    
-	    // 设置列
+	    //column configs
 	    var cm = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(),
 	    	    {header : "考核编号", width : 100,dataIndex :'sheetId',hidden : true, fixed:true},
 	    	    {header : "考核表单", width : 100,dataIndex :'sheetName',renderer:function(value,metadata){metadata.attr = 'style="color:red"';return value;}},
@@ -65,7 +65,7 @@ Ext.onReady(function(){
 		 	remoteSort : true
 	   });
 
-		//加载数据
+		//load data from server side
 	    store.load({params:{
 	    	start : 0,
 	    	limit : 16
@@ -208,11 +208,11 @@ Ext.onReady(function(){
 	           refreshText : "刷新"
 	    })
 	}); 
-   	//渲染
+   	//render
 	sheetGridPanel.render();   
 });
 
-//---开始考核----begin--------------
+//--start evaluate----begin--------------
 function startEvaluateOperations(sheetId) {
 	Ext.Ajax.request({
 		url  : 'center/evaluateCSheetAction!getEvaluateSheets.action',
@@ -237,9 +237,9 @@ function startEvaluateOperations(sheetId) {
 	});
 }
 
-//---开始考核----end--------------
+//---start evaluate----end--------------
 
-//-------继续考核表单-----begin------
+//-------continue to evaluate-----begin------
 function doEvaluateOperations(sheetId){
 	Ext.Ajax.request({
 		url  : 'center/evaluateCSheetAction!getEvaluateSheets.action',
@@ -264,7 +264,7 @@ function doEvaluateOperations(sheetId){
 	});
 }
 
-//-------继续考核表单-----end------
+//-------continue to evaluate-----end------
 
 //--------click delete operations----begin----
 function doDelOperations(value) {
