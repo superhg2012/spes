@@ -123,7 +123,7 @@ var ManageSheet = (function (){
 					{
 						xtype: 'tabpanel',
 						activeTab: 0,
-						itemId: 'tabPanel'
+						id : 'tabPanel'
 					}
 				]
 			});

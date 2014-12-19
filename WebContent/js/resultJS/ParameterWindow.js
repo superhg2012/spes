@@ -88,11 +88,30 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 	    		  callback : function(options, success, response){
 	    		    if(success){
 	    		      var json = Ext.util.JSON.decode(response.responseText);
-			    	  json = eval(json);
-			    		if(json.length > 0) {
-				    		for(var i = 0;i<json.length; i++){
-				    			var record = new Ext.data.Record({itemId : json[i].itemId, itemValue : json[i].pItemValue, itemName : json[i].itemName,pItemName:json[i].pItemName,pItemId:json[i].pItemId,itemType:json[i].itemType,itemWeight:json[i].itemWeight,centerId:centerId});
-			   					store.add(record);
+	    		      var length = json["length"];
+			    	  json = eval(json["all"]);
+ 		    		  if(length > 0) {
+			    			//loop second level items
+				    		for(var i = 0;i < length; i++) {
+				    			var second = json[i]["second"];
+				    			var third = json[i]["third"];
+				    			var length2 = json[i]["length"];
+				    			if(second !=undefined || second!=null){
+					    			var record = new Ext.data.Record({itemId : second.itemId, itemValue : second.itemScore, itemName : second.itemName, itemGrade: '二级',centerId:centerId});
+				   					store.add(record);
+				    			}
+				    			if(third != undefined || third != null) {
+					    			//loop third level items
+				    				for(var j=0;j<length2;j++) {
+				    					var tt = third[i+"_3"][j];
+				    					if(tt!=null || tt!=undefined){
+					    					var record = new Ext.data.Record({itemId : tt.itemId, itemValue : tt.itemValue, itemName : tt.itemName, itemGrade: '三级',centerId:centerId});
+					    					store.add(record);
+				    					}
+
+				    				}
+				    			}
+
 				    		}
 			    		}//end if
 	    		    } else{
@@ -103,31 +122,31 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 	    		return;
 	    	}
 	    	
-	    	firstItemId = itemId;
-	    	store.removeAll();
-			Ext.Ajax.request({
-				url : 'sys/centerItemAction!getCenterItemByItemId2.action',
-			    method : 'POST',
-			    scope : this,
-			    params : {'itemId' : itemId,"centerId" : centerId},
-			    callback : function(options , success , response){
-			    	if(success){
-			    		if(response.responseText==""){
-			    	       return;
-			    		}
-			    		var json = Ext.util.JSON.decode(response.responseText);
-			    		json = eval(json);
-			    		if(json.length > 0){
-				    		for(var i = 0;i < json.length; i++){
-				    			var record = new Ext.data.Record({itemId : json[i].itemId, itemName : json[i].itemName,pItemName:json[i].pItemName,pItemId:json[i].pItemId,itemType:json[i].itemType,itemWeight:json[i].itemWeight,centerId:centerId});
-		        	 		   	store.add(record);
-				    		}
-			    		}//end if
-			    	}else {
-			    		return;
-			    	}
-			    }//end call back;
-			});
+//	    	firstItemId = itemId;
+//	    	store.removeAll();
+//			Ext.Ajax.request({
+//				url : 'sys/centerItemAction!getCenterItemByItemId2.action',
+//			    method : 'POST',
+//			    scope : this,
+//			    params : {'itemId' : itemId,"centerId" : centerId},
+//			    callback : function(options , success , response){
+//			    	if(success){
+//			    		if(response.responseText==""){
+//			    	       return;
+//			    		}
+//			    		var json = Ext.util.JSON.decode(response.responseText);
+//			    		json = eval(json);
+//			    		if(json.length > 0){
+//				    		for(var i = 0;i < json.length; i++){
+//				    			var record = new Ext.data.Record({itemId : json[i].itemId, itemName : json[i].itemName,pItemName:json[i].pItemName,pItemId:json[i].pItemId,itemType:json[i].itemType,itemWeight:json[i].itemWeight,centerId:centerId});
+//		        	 		   	store.add(record);
+//				    		}
+//			    		}//end if
+//			    	}else {
+//			    		return;
+//			    	}
+//			    }//end call back;
+//			});
 		};
 		
 		 var store = new Ext.data.Store({});
@@ -135,7 +154,7 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 		   {header : "指标编号", width : 80,dataIndex : 'itemId'},
 		   {header : "指标名称", width : 250,dataIndex : 'itemName'},
 		   {header : "指标得分", width : 80,dataIndex : 'itemValue'},
-		   {header : "所属指标", width : 160,dataIndex :'pItemName'}
+		   {header : "指标等级", width : 160,dataIndex :'itemGrade'}
 		  ]);
 		
 		//中心指标数据考核面板
@@ -154,8 +173,17 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 				icon : 'image/icon/disk.png',
 				style:{border : 'solid 1px #abc'},// set button border css style
 				handler : function(){
+					Ext.Ajax.request({
+					});
 			   }//end han
 			}]
+//			getRowClass : function (record, rowIndex, p, ds){
+//				var cls = "white-row";
+//				if(record.get('itemGrade') == "二级"){
+//					cls = "green-row";
+//				}
+//				return cls;
+//			}
 		});
 		
 		var myBorderPanel = new Ext.Panel({
@@ -200,7 +228,6 @@ Ext.hg.ParameterWindow = Ext.extend(Ext.Window, {
 		
 		tabPanel.add(myBorderPanel);
 		tabPanel.setActiveTab(0);
-		tabPanel.setTitle("中心考核数据");
 	},
 	
 	
