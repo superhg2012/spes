@@ -241,7 +241,14 @@ public class CenterParamDAOImpl extends HibernateDaoSupport implements
 	public CenterParam findCenterParamByParams(Integer itemId,
 			Integer centerId, String checkType, String sheetName,
 			String userName) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public CenterParam findThirdLevelParamByIds(Integer itemId,
+			Integer centerId, Integer sheetId) {
+		String hql = "From CenterParam where itemId=? and centerId=? and sheetId=?";
+		List<CenterParam> list = getHibernateTemplate().find(hql, itemId, centerId, String.valueOf(sheetId)); 
+		return list.size() > 0 ? list.get(0) : null;
 	}
 }

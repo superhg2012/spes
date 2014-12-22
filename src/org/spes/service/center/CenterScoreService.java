@@ -63,5 +63,7 @@ public interface CenterScoreService {
 	
 	public CenterScore getCheckedCenterItems(final Integer itemId, final Integer centerId, final String sheetId);
 	
+	//public CenterScore getSecondLevelItemScores(final Integer itemId, final Integer centerId, final String sheetId);
+	
 	public CenterScore getCenterScoreByParams(Integer itemId, Integer centerId, String checkType, String sheetName, String userName);
 }
