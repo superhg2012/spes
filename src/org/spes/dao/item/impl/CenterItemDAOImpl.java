@@ -412,4 +412,10 @@ public class CenterItemDAOImpl extends HibernateDaoSupport implements CenterItem
 		String hql = "from CenterItem where itemId = ? and centerId = ?";
 		return getHibernateTemplate().find(hql, itemId, centerId);
 	}
+	@Override
+	public List<CenterItem> findByParentIdAndCenterId(Integer parentId,
+			Integer centerId) {
+		String hql = "From CenterItem where parentId=? and centerId=?";
+		return getHibernateTemplate().find(hql, parentId, centerId);
+	}
 }
